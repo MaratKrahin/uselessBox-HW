@@ -1,29 +1,27 @@
 public class User implements Runnable {
+    private final ToggleSwitch toggleSwitch = new ToggleSwitch();
 
-    private final ToggleSwitch toggleSwitch;
-
-    public User(ToggleSwitch toggleSwitch) {
-        this.toggleSwitch = toggleSwitch;
-    }
-
-    public synchronized void switchOn() {
-        synchronized (toggleSwitch) {
-            toggleSwitch.setCondition(true);
-            System.out.println("Toggle ON, the box is OPEN");
-            toggleSwitch.notify();
+    public void setToggleSwitch() {
+        try {
+            int waitTime = 2000;
+            Thread.sleep(waitTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println(getName() + " set Toggle ON, the box is OPEN");
+        toggleSwitch.setCondition(ToggleSwitch.ToggleCondition.ON);
     }
 
+    private String getName() {
+        return Thread.currentThread().getName();
+    }
+
+    @Override
     public void run() {
-        int iterCount = 3 + (int) (Math.random() * 10);
-        for (int i = 0; i < iterCount; i++) {
-            this.switchOn();
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        for (int i = 0; i < 10; i++) {
+            setToggleSwitch();
         }
     }
+
 
 }

@@ -1,13 +1,17 @@
 public class ToggleSwitch {
 
-    volatile private static boolean condition;
+    private static volatile ToggleCondition condition = ToggleCondition.OFF;
 
-    public static boolean getCondition() {
+    public static ToggleCondition getCondition() {
         return condition;
     }
 
-    public void setCondition(boolean condition){
+    public void setCondition(ToggleCondition condition) {
         ToggleSwitch.condition = condition;
+    }
+
+    static public enum ToggleCondition {
+        ON, OFF
     }
 
 

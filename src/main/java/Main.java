@@ -1,12 +1,11 @@
 public class Main {
     public static void main(String[] args) {
 
-        final ToggleSwitch gameStartToggle = new ToggleSwitch();
-        final User user = new User(gameStartToggle);
-        final StupidBox stupidBox = new StupidBox(gameStartToggle, user);
+        final User user = new User();
+        final StupidBox stupidBox = new StupidBox();
 
-        Thread userThread = new Thread(user, "user");
-        Thread boxThread = new Thread(stupidBox, "box");
+        Thread userThread = new Thread(user, "IVAN");
+        Thread boxThread = new Thread(stupidBox, "TIGER BOX");
 
         userThread.start();
         boxThread.start();
